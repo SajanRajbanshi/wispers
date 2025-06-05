@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wisper - Anonymous Q&A Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" href="/assets/ear-svgrepo-com.svg" type="image/x-icon" />
+
+    <style>
+      /* Reset and Base Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: #212529;
+        background-color: #fff;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Utility Classes */
+      .text-center {
+        text-align: center;
+      }
+
+      .mt-1 {
+        margin-top: 0.5rem;
+      }
+      .mt-2 {
+        margin-top: 1rem;
+      }
+      .mt-3 {
+        margin-top: 1.5rem;
+      }
+      .mt-4 {
+        margin-top: 2rem;
+      }
+      .mt-5 {
+        margin-top: 2.5rem;
+      }
+      .mt-6 {
+        margin-top: 3rem;
+      }
+
+      .mb-1 {
+        margin-bottom: 0.5rem;
+      }
+      .mb-2 {
+        margin-bottom: 1rem;
+      }
+      .mb-3 {
+        margin-bottom: 1.5rem;
+      }
+      .mb-4 {
+        margin-bottom: 2rem;
+      }
+      .mb-5 {
+        margin-bottom: 2.5rem;
+      }
+      .mb-6 {
+        margin-bottom: 3rem;
+      }
+
+      .py-1 {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .py-2 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+      .py-3 {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+      .py-4 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+      }
+      .py-5 {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+      .py-6 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+      .py-8 {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .px-2 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      .px-4 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      /* Colors */
+      .primary-color {
+        color: #0ba38a;
+      }
+      .secondary-color {
+        color: #0ba38a;
+      }
+      .text-light {
+        color: #f8f9fa;
+      }
+      .text-secondary {
+        color: #6c757d;
+      }
+      .bg-light {
+        background-color: #f8f9fa;
+      }
+      .bg-primary {
+        background-color: #0ba38a;
+      }
+      .bg-gradient {
+        background: linear-gradient(135deg, #0ba38a 0%, #3a0ca3 100%);
+        color: white;
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background-color: #0ba38a;
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: #0ba38a;
+        color: white;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid #0ba38a;
+        color: #0ba38a;
+      }
+
+      .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Header & Navigation */
+      header {
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #0ba38a;
+      }
+
+      .menu {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .menu-item {
+        color: #212529;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .menu-item:hover {
+        color: #0ba38a;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #0ba38a;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 5rem 0;
+        border-radius: 0 0 24px 24px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .steps-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .step-card {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .icon-circle {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: #d6dfff;
+        color: #0ba38a;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .step-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Feature Cards */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: #0ba38a;
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 5rem 0;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .testimonial-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        height: 100%;
+      }
+
+      .testimonial-title {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .testimonial-text {
+        color: #6c757d;
+        margin-bottom: 1rem;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        color: #0ba38a;
+        font-weight: 500;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 4rem 0;
+        color: white;
+        text-align: center;
+      }
+
+      .cta-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      footer {
+        padding: 4rem 0 2rem;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-heading {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-links li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-links a {
+        color: #6c757d;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #0ba38a;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        color: #0ba38a;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background-color: #0ba38a;
+        color: white;
+      }
+
+      .copyright {
+        border-top: 1px solid #e9ecef;
+        padding-top: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #6c757d;
+      }
+
+      .legal-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .legal-links a {
+        color: #6c757d;
+        transition: color 0.3s ease;
+      }
+
+      .legal-links a:hover {
+        color: #0ba38a;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-image {
+          display: none;
+        }
+
+        .steps-container,
+        .features-grid,
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .menu,
+        .auth-buttons {
+          display: none;
+        }
+
+        .menu.active {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background-color: white;
+          padding: 2rem;
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+          z-index: 1000;
+        }
+
+        .copyright {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+        }
+
+        .legal-links {
+          justify-content: center;
+        }
+      }
+
+      /* Mobile menu animation */
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 2rem;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .mobile-menu.active {
+        display: flex;
+      }
+
+      .mobile-menu-item {
+        color: #212529;
+        padding: 0.5rem 0;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .mobile-menu-item:hover {
+        color: #0ba38a;
+      }
+
+      .mobile-auth {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header/Navigation -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <a href="#" class="logo">Wisper</a>
+
+          <ul class="menu">
+            <li><a href="#how-it-works" class="menu-item">How it Works</a></li>
+            <li><a href="#features" class="menu-item">Features</a></li>
+            <li><a href="#about" class="menu-item">About Us</a></li>
+          </ul>
+
+          <div class="auth-buttons">
+            <a
+              href="https://wisper-theta.vercel.app/signin"
+              class="btn btn-outline"
+              >Sign In</a
+            >
+            <a
+              href="https://wisper-theta.vercel.app/signup"
+              class="btn btn-primary"
+              >Sign Up</a
+            >
+          </div>
+
+          <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
+        </nav>
+
+        <div class="mobile-menu" id="mobile-menu">
+          <a href="#how-it-works" class="mobile-menu-item">How it Works</a>
+          <a href="#features" class="mobile-menu-item">Features</a>
+          <a href="#about" class="mobile-menu-item">About Us</a>
+
+          <div class="mobile-auth">
+            <a
+              href="https://wisper-theta.vercel.app/signin"
+              class="btn btn-outline"
+              >Sign In</a
+            >
+            <a href="signup" class="btn btn-primary">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero bg-gradient">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <h1>Get Anonymous Answers to Your Questions</h1>
+            <p>
+              Create questions, share the link, and collect anonymous
+              responses—simple and secure.
+            </p>
+            <a
+              href="https://wisper-theta.vercel.app/signin"
+              class="btn btn-secondary btn-lg"
+              >Get Started for Free</a
+            >
+          </div>
+          <div class="hero-image">
+            <img src="assets/ear-svgrepo-com.svg" alt="Q&A Illustration" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="features" id="how-it-works">
+      <div class="container">
+        <h2 class="section-title text-center">How It Works</h2>
+
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="icon-circle">
+              <i class="fas fa-question"></i>
+            </div>
+            <h3 class="step-title">Create</h3>
+            <p class="text-secondary">
+              Post your questions in seconds with our easy-to-use interface.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="icon-circle">
+              <i class="fas fa-share-alt"></i>
+            </div>
+            <h3 class="step-title">Share</h3>
+            <p class="text-secondary">
+              Get a unique link to share anywhere—social media, email, or
+              messaging.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="icon-circle">
+              <i class="fas fa-inbox"></i>
+            </div>
+            <h3 class="step-title">Collect</h3>
+            <p class="text-secondary">
+              Receive anonymous answers and insights from anyone you share with.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features bg-light py-8" id="features">
+      <div class="container">
+        <h2 class="section-title text-center">Features</h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Privacy First</h3>
+            <p class="text-secondary">
+              Anonymous responses with no tracking or personal data collection.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-share-nodes"></i>
+            </div>
+            <h3 class="feature-title">Easy Sharing</h3>
+            <p class="text-secondary">
+              One-click sharing to social platforms and direct links.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-table-columns"></i>
+            </div>
+            <h3 class="feature-title">Organized Dashboard</h3>
+            <p class="text-secondary">
+              All your questions and answers in one convenient place.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-screen"></i>
+            </div>
+            <h3 class="feature-title">Mobile Friendly</h3>
+            <p class="text-secondary">
+              Use on any device, anywhere with our responsive design.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-6">
+          <a
+            href="https://wisper-theta.vercel.app/signin"
+            class="btn btn-primary btn-lg"
+            >Create Your First Question</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <!-- <section class="testimonials" id="about">
+        <div class="container">
+            <h2 class="section-title text-center">How People Use Wisper</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <h3 class="testimonial-title">Team Feedback</h3>
+                    <p class="testimonial-text">"I use this for anonymous feedback from my team. It's helped us improve communication and address issues we didn't know existed."</p>
+                    <p class="testimonial-author">— Team Manager</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <h3 class="testimonial-title">Event Planning</h3>
+                    <p class="testimonial-text">"Perfect for gathering food preferences and suggestions for our company events without putting people on the spot."</p>
+                    <p class="testimonial-author">— Event Coordinator</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <h3 class="testimonial-title">Education</h3>
+                    <p class="testimonial-text">"My students feel more comfortable asking questions anonymously. Class participation has increased significantly!"</p>
+                    <p class="testimonial-author">— University Professor</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Call to Action Section -->
+    <section class="cta-section bg-primary">
+      <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Join thousands of users collecting anonymous feedback today.</p>
+        <a
+          href="https://wisper-theta.vercel.app/signup"
+          class="btn btn-secondary btn-lg"
+          >Create Free Account</a
+        >
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4 class="footer-heading primary-color">Wisper</h4>
+            <p class="text-secondary">
+              The simple way to collect anonymous feedback and answers.
+            </p>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#about">About Me</a></li>
+              <!-- <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4 class="footer-heading">Connect With Me</h4>
+            <div class="social-links">
+              <a href="https://www.facebook.com/share/16Ev1r6Z6v/" class="social-icon" target="_blank"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="https://www.instagram.com/sajan.kumar.rajbanshi" class="social-icon" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.linkedin.com/in/sajanrajbanshi" class="social-icon" target="_blank"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2025 Wisper. All rights reserved.</p>
+
+          <!-- <div class="legal-links">
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                </div> -->
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu functionality
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      hamburger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileMenuItems = document.querySelectorAll(".mobile-menu-item");
+      mobileMenuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Animation for feature cards on scroll
+      const featureCards = document.querySelectorAll(".feature-card");
+
+      const observerOptions = {
+        threshold: 0.2,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      featureCards.forEach((card) => {
+        card.style.opacity = 0;
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        observer.observe(card);
+      });
+    </script>
+  </body>
+</html>
